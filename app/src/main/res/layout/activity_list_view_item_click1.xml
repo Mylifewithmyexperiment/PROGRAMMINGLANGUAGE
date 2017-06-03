@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wordpress.sjatyourservice.programminglanguage.ListViewItemClick1">
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+
+        >
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="wrap_content"
+            android:layout_height="775dp"/>
+
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="77dp"
+            android:layout_height="87dp"
+            android:layout_gravity="right"
+            app:srcCompat="@drawable/share"/>
+
+        <TextView
+                  android:id="@+id/launchCount"
+                  android:text="@string/app_message"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+            />
+
+
+
+    </LinearLayout>
+
+</ScrollView>
