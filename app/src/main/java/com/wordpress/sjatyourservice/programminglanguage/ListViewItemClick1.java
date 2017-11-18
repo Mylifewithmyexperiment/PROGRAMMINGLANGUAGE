@@ -15,15 +15,43 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class ListViewItemClick1 extends AppCompatActivity {
    ListView listView;
     ImageView ImageButton;
     private TextView mlaunchCount;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view_item_click1);
+
+
+        MobileAds.initialize(this,"ca-app-pub-5278704802151871~6743811219");
+
+        mAdView = (AdView) findViewById(R.id.adView);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                mAdView.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void onAdFailedToLoad (int i)
+            {
+                mAdView.setVisibility(View.GONE);
+            }
+        });
+
+        mAdView.loadAd(adRequest);
+
+
 
         ImageButton=(ImageView) findViewById(R.id.imageButton);
 
@@ -110,9 +138,7 @@ public class ListViewItemClick1 extends AppCompatActivity {
 
 
 
-
-
-        //from here progm for rate us dialog starts!!!
+  //from here progm for rate us dialog starts!!!
 
 
 //for counting each launch of app
@@ -143,7 +169,8 @@ protected void shareit(){
     private void showRateAppDialogIfNeeded() {
         boolean bool = AppPreferences.getInstance(getApplicationContext()).getAppRate();
         int i = AppPreferences.getInstance(getApplicationContext()).getLaunchCount();
-        if ((bool) && (i == 3)) {
+        if ((bool)&& (i == 2) ) {
+            //|| (i == 2)
             createAppRatingDialog(getString(R.string.rate_app_title), getString(R.string.rate_app_message)).show();
         }
     }
@@ -173,7 +200,8 @@ protected void shareit(){
 
     //for opening app in play store
     public static void openAppInPlayStore(Context paramContext) {
-        paramContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/")));
+        paramContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google" +
+                ".com/store/apps/details?id=com.wordpress.sjatyourservice.programminglanguage")));
     }
     //for feedback directly to mail id
     public static void openFeedback(Context paramContext) {
@@ -197,3 +225,7 @@ protected void shareit(){
 
 }
 
+/**
+ App ID: ca-app-pub-5278704802151871~6743811219
+ Ad unit ID: ca-app-pub-5278704802151871/4388454079
+ **/
